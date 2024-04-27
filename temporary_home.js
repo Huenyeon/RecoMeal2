@@ -211,7 +211,7 @@ const Home = ({route,navigation}) => {
     <View style={styles.container}>
     <View style = {styles.header}>
       <View>
-      <Image source= {require("./assets/gradient.png")} style={{position:"absolute"}}></Image>
+      <Image source= {require("./assets/gradient.png")} style={{position:"absolute", paddingBottom: 100}}></Image>
       </View>
         
     <View style={styles.abtnprem}>
@@ -282,6 +282,9 @@ const Home = ({route,navigation}) => {
 
 
 const styles = StyleSheet.create({
+  header:{
+    marginTop: 20,
+  },
   container: {
     flex: 1,
     position: 'relative',
@@ -294,16 +297,23 @@ const styles = StyleSheet.create({
     top: 20
 },
   input: {
-    flex: 1,
-    paddingVertical: 8,
-    fontSize: 16,
-    marginLeft: 15,
-    marginBottom: 10,
+    width: 190,
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
+    backgroundColor: "#D9D9D9",
     borderRadius: 10,
-  },
+    marginLeft: 10,
+    top: 0,
+    shadowOpacity: 0.59,
+    shadowRadius: 4.65,
+    elevation: 7
+},
+
+  calendar:{
+    shadowOpacity: 0.59,
+    shadowRadius: 4.65,
+    elevation: 7
+},
+
   searchbar: {
     width: 273,
     height: 40,
