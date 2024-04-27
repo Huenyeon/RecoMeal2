@@ -19,6 +19,14 @@ const Home = ({route,navigation}) => {
 
   }
 
+  const navigate_to_favorites = () => {
+    navigation.navigate('FavoritesScreen')
+  }
+
+
+
+  
+
   const navigate_to_ingredient = () => {
     navigation.navigate('temporary_ingredientscreen')
   }
@@ -155,8 +163,16 @@ const Home = ({route,navigation}) => {
 
 
   
-  const RecipeCard = ({ recipe }) => (
-    <View style={{height:234, }}>
+  const RecipeCard = ({ recipe }) => {
+    
+    const [favorites, setfavorites] = useState(false)
+
+    const toggleFavorites = () => {
+      setfavorites(!favorites)
+      
+    }
+    
+    return <View style={{height:234, }}>
       <View style={{justifyContent:'flex-start', alignItems:'center', marginHorizontal: 5, marginBottom: 20, backgroundColor: '#333A73', borderRadius: 15, elevation: 3, marginTop: 10,height: 234, width:162 }}>
         <Image
           source={{ uri: recipe.recipe.image }}
@@ -171,11 +187,14 @@ const Home = ({route,navigation}) => {
         <View style={{ flex: 1, justifyContent: 'flex-end', paddingBottom: 10 }}>
           <View
             style={{  width: 138, height: 19, backgroundColor:'white', flexDirection:'row', alignItems:'center', justifyContent:'center', borderRadius:10, }}>
-            
-            
-          
+
             <View style={{width: 13, height: 13, backgroundColor:'#FBA834', borderRadius:6.6, justifyContent:'center', alignItems:'center', marginRight:3, marginLeft:0}}>
-              <Image source={require('./assets/hearticon.png')} style={{width:13, height:10}}></Image>
+              <Pressable onPress={toggleFavorites}>
+                <Image source={
+                  favorites ?
+                   require('./assets/redhearticon.png') : require('./assets/hearticon.png')
+                  } style={{width:13, height:10}}></Image>
+              </Pressable>
             </View>
             
             <Text style={{fontSize:6, fontWeight:'500',  color:'black', }}>Add To Favorites</Text>
@@ -190,7 +209,7 @@ const Home = ({route,navigation}) => {
         </View>
       </View>
     </View>
-  );
+  }
   
   const RecipeList = ({ recipes }) => (
     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -211,7 +230,7 @@ const Home = ({route,navigation}) => {
     <View style={styles.container}>
     <View style = {styles.header}>
       <View>
-      <Image source= {require("./assets/gradient.png")} style={{position:"absolute", paddingBottom: 100}}></Image>
+      <Image source= {require("./assets/gradient.png")} style={{position:"absolute"}}></Image>
       </View>
         
     <View style={styles.abtnprem}>
@@ -244,7 +263,7 @@ const Home = ({route,navigation}) => {
           
           <View style={{ width: 8}}/>
           
-          <Pressable style={styles.icons}>
+          <Pressable style={styles.icons} onPress={navigate_to_favorites}>
             <Image style={styles.icon} source={require("./assets/favoritesIcon.png")} />
             <Text style={styles.descriptionText}>FAVORITES</Text>
           </Pressable>
@@ -282,9 +301,6 @@ const Home = ({route,navigation}) => {
 
 
 const styles = StyleSheet.create({
-  header:{
-    marginTop: 20,
-  },
   container: {
     flex: 1,
     position: 'relative',
